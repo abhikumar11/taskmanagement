@@ -1,4 +1,5 @@
 const Admin=require("../models/AdminModel");
+
 const loginUser=async(req,res)=>{
     const {email,password}=req.body;
     console.log(req.body);
