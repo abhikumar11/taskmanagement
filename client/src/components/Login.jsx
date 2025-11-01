@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 const Login = () => {
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
@@ -11,7 +11,7 @@ const Login = () => {
     if (role == "admin") {
       try {
         const res = await axios.post(
-          "http://localhost:3001/admin/login",
+          `${import.meta.env.VITE_BACKEND_URL}/admin/login`,
           { email, password, role }
         );
         alert(res.data);
