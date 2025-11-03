@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 
 const NewUser = () => {
@@ -8,8 +9,15 @@ const NewUser = () => {
     console.log(frmInput);
   }
   const handleSubmit=async(e)=>{
+
     e.preventDefault();
       console.log(frmInput);
+      try{
+          const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/admin/createemployee`,frmInput);
+                 console.log(res.data);
+      }catch(err){
+        console.log(err.response.data);
+      }
   }
 
   return (
