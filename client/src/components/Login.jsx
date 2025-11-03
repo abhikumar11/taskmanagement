@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const navigate=useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,9 +16,12 @@ const Login = () => {
           `${import.meta.env.VITE_BACKEND_URL}/admin/login`,
           { email, password, role }
         );
-        alert(res.data);
+       console.log(res.data);
+       localStorage.setItem("user",JSON.stringify(res.data.user));
+       navigate("/admin/dashboard");
+
       } catch (err) {
-        alert(err.response.data);
+        console.log(err.response.data);
       }
     }
   };
