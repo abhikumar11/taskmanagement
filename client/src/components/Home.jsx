@@ -10,7 +10,7 @@ const Home = () => {
         <div className="flex flex-col items-center mb-6">
           <ClipboardList className="w-14 h-14 text-orange-500 mb-3" />
           <h1 className="text-4xl font-bold text-orange-600 text-center">
-            Task Management System
+            Task Manager
           </h1>
         </div>
 

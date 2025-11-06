@@ -31,17 +31,17 @@ const AdminDashboard = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
             <h3 className="text-lg font-semibold text-gray-700 mb-2">Total Users</h3>
-            <p className="text-3xl font-bold text-orange-500">23</p>
+            <p className="text-3xl font-bold text-orange-500">0</p>
           </div>
 
           <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
             <h3 className="text-lg font-semibold text-gray-700 mb-2">Active Tasks</h3>
-            <p className="text-3xl font-bold text-green-500">12</p>
+            <p className="text-3xl font-bold text-green-500">0</p>
           </div>
 
           <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
             <h3 className="text-lg font-semibold text-gray-700 mb-2">Pending Tasks</h3>
-            <p className="text-3xl font-bold text-blue-500">4</p>
+            <p className="text-3xl font-bold text-blue-500">0</p>
           </div>
         </div>
 
