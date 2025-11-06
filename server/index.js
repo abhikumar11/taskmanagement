@@ -6,12 +6,14 @@ const cors=require("cors");
 const bodyparser = require("body-parser");
 const mongoose=require("mongoose");
 const adminRoute=require("./routes/adminRoute");
+const employeeRoute=require("./routes/empRoute");
 mongoose.connect(process.env.DBCONN).then(()=>console.log("Db connected successfully"))
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use("/admin",adminRoute);
+app.use("/employee",employeeRoute);
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`)
 })

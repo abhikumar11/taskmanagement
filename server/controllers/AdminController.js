@@ -1,5 +1,6 @@
 const Admin = require("../models/AdminModel");
 const Employee = require("../models/EmployeeModel");
+const Task = require("../models/TaskModel");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 const { generatePassword } = require("../middleware/RandomPassword");
@@ -88,5 +89,20 @@ The Admin Team
           });
      }
 };
+const assignTask=async(req,res)=>{
 
-module.exports = { loginUser, newEmplyee };
+          try {
+               console.log(req.body);
+               const temp=await Task.create(req.body);
+               if(temp){
+                    res.status(200).send("Task assigned");
+               }
+               else{
+                    res.status(400).send("Unable to assign task");
+               }
+          } catch (err) {
+               res.status(500).send("Something went wrong");
+          }
+}
+
+module.exports = { loginUser, newEmplyee,assignTask };
