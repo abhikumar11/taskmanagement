@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const Login = () => {
 
   const [email, setEmail] = useState("");
@@ -18,9 +19,11 @@ const Login = () => {
         );
        console.log(res.data);
        localStorage.setItem("user",JSON.stringify(res.data.user));
+       toast.success("login success");
        navigate("/admin/dashboard");
 
       } catch (err) {
+        toast.error(err.response.data)
         console.log(err.response.data);
       }
     }

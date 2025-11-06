@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaSignOutAlt } from 'react-icons/fa';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AdminLayout = () => {
   const user=JSON.parse(localStorage.getItem("user"));
@@ -8,7 +9,7 @@ const AdminLayout = () => {
   
   const handleLogout=()=>{
     localStorage.removeItem("user");
-    alert("logout successfull");
+    toast.success("logout successfull");
     navigate("/")
   }
   return (

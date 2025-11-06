@@ -1,4 +1,5 @@
 import React from 'react'
+ import { ToastContainer } from 'react-toastify';
 import Home from './components/Home'
 import { Route, Routes } from 'react-router-dom'
 import AdminDashboard from "./components/admin/AdminDashboard";
@@ -10,6 +11,7 @@ const App = () => {
 
   return (
     <div>
+      <ToastContainer position="top-center" />
    <Routes>
      
       <Route path="/" element={<Home />} />
