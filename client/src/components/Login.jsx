@@ -1,13 +1,15 @@
 import React, { useState } from "react";
+import { FaSignInAlt } from "react-icons/fa";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
 const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,10 +19,26 @@ const Login = () => {
           `${import.meta.env.VITE_BACKEND_URL}/admin/login`,
           { email, password, role }
         );
-       console.log(res.data);
-       localStorage.setItem("user",JSON.stringify(res.data.user));
-       toast.success("login success");
-       navigate("/admin/dashboard");
+        console.log(res.data);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        toast.success("login success");
+        navigate("/admin/dashboard");
+
+      } catch (err) {
+        toast.error(err.response.data)
+        console.log(err.response.data);
+      }
+    }
+    else {
+      try {
+        const res = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/employee/login`,
+          { email, password, role }
+        );
+        console.log(res.data);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        toast.success("login success");
+        navigate("/employee/dashboard");
 
       } catch (err) {
         toast.error(err.response.data)
@@ -88,9 +106,10 @@ const Login = () => {
             </select>
           </div>
           <button
-            className="w-full py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition duration-200"
+            className="w-full flex items-center justify-center gap-2 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition duration-200"
             onClick={handleSubmit}
           >
+            <FaSignInAlt className="text-lg" />
             Login
           </button>
         </form>
