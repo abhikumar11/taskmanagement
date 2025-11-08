@@ -41,4 +41,19 @@ const fetchTasks=async(req,res)=>{
           res.status(501).send({res:"Something went wrong"});
      }
 }
-module.exports={fetchAllEmployee,empLogin,fetchTasks};
+const updateReport=async(req,res)=>{
+     const {taskid,completeddate,status}=req.body;
+     console.log(req.body);
+     try {
+          const temp=await Task.findByIdAndUpdate(taskid,{completeddate,status});
+          if(temp){
+               res.status(201).send({msg:"Report Send Successfully"});
+          }
+          else{
+               res.status(401).send({msg:"Unable to send report"});
+          }
+     } catch (err) {
+          res.status(501).send({msg:"Something went wrong"});
+     }
+}
+module.exports={fetchAllEmployee,empLogin,fetchTasks,updateReport};
