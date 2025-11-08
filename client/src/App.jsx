@@ -9,6 +9,7 @@ import AdminLayout from './components/admin/AdminLayout';
 import EmpLayout from './components/employee/EmpLayout';
 import EmpDashboard from './components/employee/EmpDashboard';
 import EmpTaskList from "./components/employee/EmpTaskList"
+import EmpAllTask from "./components/employee/EmpAllTask"
 const App = () => {
 
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/employee" element={<EmpLayout />}>
           <Route path="/employee/dashboard" element={<EmpDashboard/>} />
           <Route path="/employee/tasklist" element={<EmpTaskList/>} />
+          <Route path="/employee/alltasks" element={<EmpAllTask/>} />
         </Route>
       </Routes>
 

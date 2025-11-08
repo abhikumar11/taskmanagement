@@ -105,4 +105,46 @@ const assignTask=async(req,res)=>{
           }
 }
 
-module.exports = { loginUser, newEmplyee,assignTask };
+  const getDashboardData = async (req, res) => {
+  try {
+
+    const users = await Employee.find();
+    const tasks = await Task.find();
+
+    const activeTasks = tasks.filter(task => task.status === "In Progress").length;
+    const pendingTasks = tasks.filter(task => task.status === "Not Completed").length;
+
+    const recentActivity = tasks
+      .slice(-5)
+      .reverse()
+      .map(task => ({
+        title: task.title,
+        empid: task.empid,
+        status: task.status,
+        assigndate: task.assigndate,
+      }));
+
+    res.status(200).json({
+      stats: {
+        totalUsers: users.length,
+        activeTasks,
+        pendingTasks,
+      },
+      recentActivity,
+    });
+  } catch (err) {
+    console.error("Error fetching dashboard data:", err);
+    res.status(500).json({ message: "Error fetching dashboard data" });
+  }
+};
+const getAllTasks = async (req, res) => {
+  try {
+    const tasks = await Task.find().populate("employeeId", "name email");
+    res.json({ tasks });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Error fetching all tasks" });
+  }
+};
+
+module.exports = { loginUser, newEmplyee,assignTask,getDashboardData,getAllTasks };

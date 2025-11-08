@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const EmpTaskList = () => {
   const [taskList, setTaskList] = useState([]);
@@ -28,13 +29,21 @@ const EmpTaskList = () => {
     setReportData({ ...reportData, [e.target.name]: e.target.value });
   };
 
-  const handleReportSave = () => {
-    // You can call API to save report here
-    console.log("Report saved:", reportData, "for task:", selectedTask);
+  const handleReportSave = async() => {
+   
+   try {
+            const res=await axios.put(`${import.meta.env.VITE_BACKEND_URL}/employee/taskreport`,
+          {taskid:selectedTask._id,...reportData});
+          toast.success(res.data.msg);
+   } catch (err) {
+          toast.error(err.response.data.msg);
+   }
     setShowReportModal(false);
   };
+  const incompleteTasks = taskList.filter(task => task.status !== "Completed");
 
   return (
+    
     <div className="p-8 bg-gray-100 min-h-screen relative">
       <h1 className="text-3xl font-bold text-gray-800 mb-8 tracking-tight">
         📋 My Task List
@@ -53,8 +62,8 @@ const EmpTaskList = () => {
           </thead>
 
           <tbody className="divide-y divide-gray-200">
-            {taskList && taskList.length > 0 ? (
-              taskList.map((task, index) => (
+            {incompleteTasks && incompleteTasks.length > 0 ? (
+             incompleteTasks.map((task,index)=>(
                 <tr
                   key={index}
                   className="hover:bg-indigo-50 transition-colors duration-200"
@@ -89,7 +98,7 @@ const EmpTaskList = () => {
                       <button
                         onClick={() => {
                           setSelectedTask(task);
-                          setReportData({ completeddate: "", status: "" });
+                          setReportData({completeddate:"",status:"" });
                           setShowReportModal(true);
                         }}
                         className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-1.5 rounded-lg text-sm font-medium shadow-sm transition-transform hover:scale-105"

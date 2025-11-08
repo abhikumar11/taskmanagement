@@ -1,10 +1,12 @@
 const express=require("express");
-const admincontoller= require("../controllers/AdminController");
+const admincontroller= require("../controllers/AdminController");
 
 const router=express.Router();
 
-router.post("/login",admincontoller.loginUser);
-router.post("/createemployee",admincontoller.newEmplyee);
-router.post("/assigntask",admincontoller.assignTask);
+router.post("/login",admincontroller.loginUser);
+router.post("/createemployee",admincontroller.newEmplyee);
+router.post("/assigntask",admincontroller.assignTask);
+router.get("/dashboard", admincontroller.getDashboardData);
+router.get("/alltasks", admincontroller.getAllTasks);
 
 module.exports=router;
