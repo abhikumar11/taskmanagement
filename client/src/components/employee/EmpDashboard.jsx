@@ -98,36 +98,72 @@ const EmpDashboard = () => {
         </div>
         <div className="mt-10">
           <h3 className="text-xl font-bold text-gray-800 mb-4">Recent Tasks</h3>
-          <div className="bg-white rounded-2xl shadow p-5">
-            {taskList.length > 0 ? (
-              taskList
-                .slice(0, 5)
-                .map((task, i) => (
-                  <div
-                    key={i}
-                    className="flex justify-between items-center border-b last:border-none py-3"
-                  >
-                    <div>
-                      <p className="font-semibold text-gray-800">{task.title}</p>
-                      <p className="text-sm text-gray-500">
-                        {task.priority || "Low"} Priority
-                      </p>
-                    </div>
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        task.status === "Completed"
-                          ? "bg-green-100 text-green-700"
-                          : "bg-orange-100 text-orange-700"
-                      }`}
-                    >
-                      {task.status || "Not Started"}
-                    </span>
-                  </div>
-                ))
-            ) : (
-              <p className="text-gray-500">No recent tasks assigned yet.</p>
-            )}
-          </div>
+          <div className="overflow-x-auto bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+  {taskList.length > 0 ? (
+    <table className="min-w-full border-collapse">
+      <thead className="bg-gradient-to-r from-orange-600 to-red-500 text-white text-sm uppercase tracking-wide">
+        <tr>
+          <th className="px-6 py-3 text-left font-semibold">Title</th>
+          <th className="px-6 py-3 text-left font-semibold">Priority</th>
+          <th className="px-6 py-3 text-center font-semibold">Status</th>
+          <th className="px-6 py-3 text-center font-semibold">Assigned Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {taskList.slice(0, 5).map((task, i) => (
+          <tr
+            key={i}
+            className={`${
+              i % 2 === 0 ? "bg-orange-50" : "bg-white"
+            } hover:bg-orange-100 transition-all duration-200`}
+          >
+            <td className="px-6 py-3 font-medium text-gray-800">
+              {task.title}
+            </td>
+            <td className="px-6 py-3 text-gray-700">
+              <span
+                className={`px-3 py-1 rounded-full text-xs font-semibold shadow-sm ${
+                  task.priority === "High"
+                    ? "bg-red-100 text-red-700 border border-red-300"
+                    : task.priority === "Medium"
+                    ? "bg-yellow-100 text-yellow-700 border border-yellow-300"
+                    : "bg-green-100 text-green-700 border border-green-300"
+                }`}
+              >
+                {task.priority || "Low"}
+              </span>
+            </td>
+            <td className="px-6 py-3 text-center">
+              <span
+                className={`px-3 py-1 rounded-full text-xs font-semibold shadow-sm ${
+                  task.status === "Completed"
+                    ? "bg-green-100 text-green-700 border border-green-300"
+                    : task.status === "In Progress"
+                    ? "bg-yellow-100 text-yellow-700 border border-yellow-300"
+                    : "bg-red-100 text-red-700 border border-red-300"
+                }`}
+              >
+                {task.status || "Not Started"}
+              </span>
+            </td>
+            <td className="px-6 py-3 text-center text-gray-700">
+              {new Date(task.assigndate).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  ) : (
+    <p className="text-gray-500 italic text-center py-6">
+      No recent tasks assigned yet.
+    </p>
+  )}
+</div>
+
         </div>
       </div>
     </div>

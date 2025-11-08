@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import {toast} from "react-toastify";
 const NewTask = () => {
   const [emp, setEmp] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -46,9 +46,9 @@ const NewTask = () => {
         `${import.meta.env.VITE_BACKEND_URL}/admin/assigntask`,
         { ...formData, empid: selectedEmp._id }
       );
-      console.log(res);
+       toast.success(res.data);
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.error);
     }
     setFormData({ title: "", description: "", duration: "", priority: "" });
   };

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { toast } from 'react-toastify';
 
 const NewUser = () => {
   const [frmInput,setFrmInput]=useState({});
@@ -14,7 +15,7 @@ const NewUser = () => {
       console.log(frmInput);
       try{
           const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/admin/createemployee`,frmInput);
-                 console.log(res.data);
+                 toast.success(res.data.message);
       }catch(err){
         console.log(err.response.data);
       }
