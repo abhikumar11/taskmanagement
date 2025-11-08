@@ -111,7 +111,11 @@ const AdminDashboard = () => {
                         </span>
                       </td>
                       <td className="px-6 py-3 text-gray-600">
-                        {new Date(task.assigndate).toLocaleDateString()}
+                        {new Date(task.assigndate).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })}
                       </td>
                     </tr>
                   ))}

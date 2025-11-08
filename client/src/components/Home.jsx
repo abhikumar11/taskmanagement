@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col items-center py-12 px-4 overflow-y-auto">
       <div className="w-full max-w-2xl bg-white shadow-xl rounded-2xl p-10 border border-gray-100">
-      
+
         <div className="flex flex-col items-center mb-6">
           <ClipboardList className="w-14 h-14 text-orange-500 mb-3" />
           <h1 className="text-4xl font-bold text-orange-600 text-center">
@@ -15,7 +15,7 @@ const Home = () => {
         </div>
 
         <p className="text-gray-600 mb-10 text-center text-base leading-relaxed tracking-wide">
-          Stay organized and boost your productivity with our intuitive task manager.  
+          Stay organized and boost your productivity with our intuitive task manager.
           Track your daily goals, manage priorities, and achieve more effortlessly.
         </p>
 

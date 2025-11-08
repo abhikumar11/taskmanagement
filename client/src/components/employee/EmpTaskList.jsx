@@ -29,21 +29,21 @@ const EmpTaskList = () => {
     setReportData({ ...reportData, [e.target.name]: e.target.value });
   };
 
-  const handleReportSave = async() => {
-   
-   try {
-            const res=await axios.put(`${import.meta.env.VITE_BACKEND_URL}/employee/taskreport`,
-          {taskid:selectedTask._id,...reportData});
-          toast.success(res.data.msg);
-   } catch (err) {
-          toast.error(err.response.data.msg);
-   }
+  const handleReportSave = async () => {
+
+    try {
+      const res = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/employee/taskreport`,
+        { taskid: selectedTask._id, ...reportData });
+      toast.success(res.data.msg);
+    } catch (err) {
+      toast.error(err.response.data.msg);
+    }
     setShowReportModal(false);
   };
   const incompleteTasks = taskList.filter(task => task.status !== "Completed");
 
   return (
-    
+
     <div className="p-8 bg-gray-100 min-h-screen relative">
       <h1 className="text-3xl font-bold text-gray-800 mb-8 tracking-tight">
         📋 My Task List
@@ -63,7 +63,7 @@ const EmpTaskList = () => {
 
           <tbody className="divide-y divide-gray-200">
             {incompleteTasks && incompleteTasks.length > 0 ? (
-             incompleteTasks.map((task,index)=>(
+              incompleteTasks.map((task, index) => (
                 <tr
                   key={index}
                   className="hover:bg-indigo-50 transition-colors duration-200"
@@ -73,13 +73,12 @@ const EmpTaskList = () => {
                   <td className="py-4 px-6">{task.duration || "—"}</td>
                   <td className="py-4 px-6">
                     <span
-                      className={`px-3 py-1 rounded-full text-xs font-semibold shadow-sm ${
-                        task.priority === "High"
+                      className={`px-3 py-1 rounded-full text-xs font-semibold shadow-sm ${task.priority === "High"
                           ? "bg-red-100 text-red-700"
                           : task.priority === "Medium"
-                          ? "bg-yellow-100 text-yellow-700"
-                          : "bg-green-100 text-green-700"
-                      }`}
+                            ? "bg-yellow-100 text-yellow-700"
+                            : "bg-green-100 text-green-700"
+                        }`}
                     >
                       {task.priority || "Low"}
                     </span>
@@ -98,7 +97,7 @@ const EmpTaskList = () => {
                       <button
                         onClick={() => {
                           setSelectedTask(task);
-                          setReportData({completeddate:"",status:"" });
+                          setReportData({ completeddate: "", status: "" });
                           setShowReportModal(true);
                         }}
                         className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-1.5 rounded-lg text-sm font-medium shadow-sm transition-transform hover:scale-105"
@@ -135,7 +134,11 @@ const EmpTaskList = () => {
           <p className="text-gray-600 mb-2">
             <strong>Assigned Date:</strong>{" "}
             {selectedTask.assigndate
-              ? new Date(selectedTask.assigndate).toLocaleDateString()
+              ? new Date(selectedTask.assigndate).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })
               : "N/A"}
           </p>
           <p className="text-gray-600 mb-4">
@@ -152,7 +155,7 @@ const EmpTaskList = () => {
         </div>
       )}
 
-      
+
       {showReportModal && selectedTask && (
         <div className="absolute top-20 left-1/2 transform -translate-x-1/2 bg-white border border-gray-300 rounded-2xl shadow-xl p-8 w-full max-w-md z-50">
           <h2 className="text-xl font-bold text-gray-800 mb-4">Report Task: {selectedTask.title}</h2>
