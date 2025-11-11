@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run index.js"
+    "start": "run nodemon index.js"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
