@@ -56,4 +56,8 @@ const updateReport=async(req,res)=>{
           res.status(501).send({msg:"Something went wrong"});
      }
 }
-module.exports={fetchAllEmployee,empLogin,fetchTasks,updateReport};
+const updateProfile=async(req,res)=>{
+          console.log(req.body);
+          res.send("ok");          
+}
+module.exports={fetchAllEmployee,empLogin,fetchTasks,updateReport,updateProfile};

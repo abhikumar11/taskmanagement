@@ -10,6 +10,7 @@ import EmpLayout from './components/employee/EmpLayout';
 import EmpDashboard from './components/employee/EmpDashboard';
 import EmpTaskList from "./components/employee/EmpTaskList"
 import EmpAllTask from "./components/employee/EmpAllTask"
+import EmpProfile from './components/employee/EmpProfile';
 const App = () => {
 
   return (
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/employee/dashboard" element={<EmpDashboard/>} />
           <Route path="/employee/tasklist" element={<EmpTaskList/>} />
           <Route path="/employee/alltasks" element={<EmpAllTask/>} />
+          <Route path="/employee/profile" element={<EmpProfile/>} />
         </Route>
       </Routes>
 
