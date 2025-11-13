@@ -57,7 +57,11 @@ const updateReport=async(req,res)=>{
      }
 }
 const updateProfile=async(req,res)=>{
-          console.log(req.body);
-          res.send("ok");          
+          try {
+               console.log(req.body);
+               res.send("ok"); 
+          } catch (err) {
+               
+          }         
 }
 module.exports={fetchAllEmployee,empLogin,fetchTasks,updateReport,updateProfile};

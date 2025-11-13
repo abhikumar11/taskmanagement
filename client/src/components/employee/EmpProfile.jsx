@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, {useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const EmpProfile = () => {
    
     const user=JSON.parse(localStorage.getItem("user"));
   const [frmInput, setFrmInput] = useState({});
-
+    const navigate=useNavigate();
   const handleInput = (e) => {
     setFrmInput({ ...frmInput, [e.target.name]: e.target.value });
     console.log(frmInput);
@@ -24,11 +25,12 @@ const EmpProfile = () => {
      
       const res = await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/employee/updateprofile`,
-        { empid: user.empid, ...frmInput }
-      );
+        { empid: user.empid, ...frmInput });
+        toast.success(res.data);
+        navigate("/")
     } catch (err) {
-      console.log(err.response?.data);
-      toast.error(err.response?.data?.message || "Something went wrong");
+      console.log(err.response.data);
+      toast.error(err.response.data);
     }
   }
 
