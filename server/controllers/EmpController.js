@@ -16,7 +16,7 @@ const fetchAllEmployee=async(req,res)=>{
 }
 const empLogin=async(req,res)=>{
      const { email, password } = req.body;
-         console.log(req.body);
+        // console.log(req.body);
          const temp = await Employee.findOne({ email });
          if (temp) {
               if (temp.password === password) {
@@ -57,11 +57,17 @@ const updateReport=async(req,res)=>{
      }
 }
 const updateProfile=async(req,res)=>{
+     const {userid,password}=req.body;
           try {
-               console.log(req.body);
-               res.send("ok"); 
+               const temp=await Employee.findByIdAndUpdate(userid,{password:password});
+               if(temp){
+                    res.status(200).send("Password updated");
+               }
+               else{
+                    res.status(401).send("Unable to change the password");
+               }
           } catch (err) {
-               
+               res.status(500).send("Something went wrong");
           }         
 }
 module.exports={fetchAllEmployee,empLogin,fetchTasks,updateReport,updateProfile};

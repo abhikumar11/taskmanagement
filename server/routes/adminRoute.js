@@ -8,5 +8,6 @@ router.post("/createemployee",admincontroller.newEmplyee);
 router.post("/assigntask",admincontroller.assignTask);
 router.get("/dashboard", admincontroller.getDashboardData);
 router.get("/alltasks", admincontroller.getAllTasks);
+router.put("/updateprofile", admincontroller.updateProfile);
 
 module.exports=router;

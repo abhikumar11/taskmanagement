@@ -11,7 +11,7 @@ const loginUser = async (req, res) => {
      const temp = await Admin.findOne({ email });
      if (temp) {
           if (temp.password === password) {
-               const user = { name: temp.name, email: temp.email };
+               const user={userid:temp._id,name:temp.name,email:temp.email};
                res.status(200).send({ msg: "login success", user });
           } else {
                res.status(401).send("invalid password");
@@ -146,5 +146,20 @@ const getAllTasks = async (req, res) => {
     res.status(500).json({ msg: "Error fetching all tasks" });
   }
 };
+const updateProfile=async(req,res)=>{
+     const {userid,password}=req.body;
+     console.log(req.body);
+          try {
+               const temp=await Admin.findByIdAndUpdate(userid,{password:password});
+               if(temp){
+                    res.status(200).send("Password updated");
+               }
+               else{
+                    res.status(401).send("Unable to change the password");
+               }
+          } catch (err) {
+               res.status(500).send("Something went wrong");
+          }         
+}
 
-module.exports = { loginUser, newEmplyee,assignTask,getDashboardData,getAllTasks };
+module.exports = { loginUser, newEmplyee,assignTask,getDashboardData,getAllTasks,updateProfile};

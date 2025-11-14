@@ -11,6 +11,7 @@ import EmpDashboard from './components/employee/EmpDashboard';
 import EmpTaskList from "./components/employee/EmpTaskList"
 import EmpAllTask from "./components/employee/EmpAllTask"
 import EmpProfile from './components/employee/EmpProfile';
+import AdminProfile from './components/admin/AdminProfile';
 const App = () => {
 
   return (
@@ -18,12 +19,13 @@ const App = () => {
       <ToastContainer position="top-center" />
       <Routes>
 
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home/>} />
 
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/newuser" element={<NewUser />} />
-          <Route path="/admin/assigntask" element={<NewTask />} />
+        <Route path="/admin" element={<AdminLayout/>}>
+          <Route path="/admin/dashboard" element={<AdminDashboard/>} />
+          <Route path="/admin/newuser" element={<NewUser/>} />
+          <Route path="/admin/assigntask" element={<NewTask/>} />
+          <Route path="/admin/profile" element={<AdminProfile/>} />
         </Route>
 
         <Route path="/employee" element={<EmpLayout />}>

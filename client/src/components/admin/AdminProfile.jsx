@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const EmpProfile = () => {
+const AdminProfile = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const [frmInput, setFrmInput] = useState({});
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const EmpProfile = () => {
     try {
       const res = await axios.put(
         `${import.meta.env.VITE_BACKEND_URL
-        }/employee/updateprofile`,
+        }/admin/updateprofile`,
         { userid: user.userid, password: frmInput.newPassword }
       );
       toast.success(res.data);
@@ -92,4 +92,4 @@ const EmpProfile = () => {
   );
 };
 
-export default EmpProfile;
+export default AdminProfile;
